@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Drawing Game</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">
+            <div class="brand-icon">✎</div>
+            <h2>AI Drawing Game</h2>
+        </div>
+
+        <div class="nav-actions">
+            <button id="dashboardBtn" class="nav-btn hidden">Dashboard</button>
+            <button id="newGameBtn" class="nav-btn hidden">New Game</button>
+            <div id="avatar" class="avatar hidden">U</div>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- LOGIN SCREEN -->
+        <section id="loginScreen" class="screen login-layout">
+            <div class="hero">
+                <div class="badge">AI + ML Powered Game</div>
+                <h1>Draw. Guess. Compete with AI.</h1>
+                <p>
+                    A real-time collaborative drawing game platform with
+                    Machine Learning prediction and Generative AI prompts.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span>🎨</span>
+                        <h3>Real-time Drawing</h3>
+                        <p>Draw on a smooth touch-friendly canvas.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span>👥</span>
+                        <h3>Multiplayer Rooms</h3>
+                        <p>Create or join game rooms using room codes.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span>🤖</span>
+                        <h3>ML Prediction</h3>
+                        <p>Predict drawing category using AI model.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span>✨</span>
+                        <h3>AI Prompts</h3>
+                        <p>Generate creative prompts for every round.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <h2>Welcome Back</h2>
+                <p>Enter your details to start playing.</p>
+
+                <label>Username</label>
+                <input id="usernameInput" type="text" placeholder="Enter username" />
+
+                <label>Password</label>
+                <input id="passwordInput" type="password" placeholder="Enter password" />
+
+                <button id="loginBtn" class="primary-btn">Login</button>
+                <button id="registerBtn" class="secondary-btn">Register</button>
+
+                <p id="loginMessage" class="message"></p>
+            </div>
+        </section>
+
+        <!-- LOBBY SCREEN -->
+        <section id="lobbyScreen" class="screen hidden">
+            <div class="page-heading">
+                <div>
+                    <h1>Welcome back, <span id="playerName">Player</span> 👋</h1>
+                    <p>Ready to draw and guess? Create a room or join your friends.</p>
+                </div>
+            </div>
+
+            <div class="lobby-grid">
+                <div class="panel">
+                    <div class="panel-title">
+                        <div class="mini-icon orange">+</div>
+                        <h2>Create Room</h2>
+                    </div>
+
+                    <label>Category</label>
+                    <select id="categorySelect">
+                        <option value="Animals">Animals</option>
+                        <option value="Objects">Objects</option>
+                        <option value="Food">Food</option>
+                        <option value="Vehicles">Vehicles</option>
+                        <option value="Nature">Nature</option>
+                    </select>
+
+                    <label>Difficulty</label>
+                    <select id="difficultySelect">
+                        <option value="Easy">Easy</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+
+                    <div class="difficulty-tabs">
+                        <button data-level="Easy">Easy</button>
+                        <button data-level="Medium" class="active">Medium</button>
+                        <button data-level="Hard">Hard</button>
+                    </div>
+
+                    <button id="createRoomBtn" class="primary-btn">+ Create Room</button>
+
+                    <div class="room-code-card">
+                        <p>Your Room Code</p>
+                        <div class="room-code-row">
+                            <h2 id="roomCodeText">------</h2>
+                            <button id="copyRoomBtn">Copy</button>
+                        </div>
+                        <small>Share this code with friends to join your room.</small>
+                    </div>
+                </div>
+
+                <div class="right-content">
+                    <div class="panel join-panel">
+                        <div class="panel-title">
+                            <div class="mini-icon blue">↪</div>
+                            <h2>Join Existing Room</h2>
+                        </div>
+
+                        <div class="join-row">
+                            <input id="joinRoomInput" type="text" placeholder="Enter room code e.g. AB12CD" />
+                            <button id="joinRoomBtn">Join Room</button>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-title">
+                            <div class="mini-icon orange">?</div>
+                            <h2>How to Play</h2>
+                        </div>
+
+                        <div class="rules-grid">
+                            <div class="rule-card">
+                                <span>✎</span>
+                                <p>The drawer gets an AI-generated prompt and has 60 seconds to draw it.</p>
+                            </div>
+
+                            <div class="rule-card">
+                                <span>👥</span>
+                                <p>Other players type their guesses in the chat. First correct guess wins.</p>
+                            </div>
+
+                            <div class="rule-card">
+                                <span>🤖</span>
+                                <p>ML model predicts the drawing category when triggered.</p>
+                            </div>
+
+                            <div class="rule-card">
+                                <span>🏆</span>
+                                <p>Points are awarded based on speed and correct guesses.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <h2>14</h2>
+                            <p>Active Rooms</p>
+                        </div>
+                        <div class="stat-card blue-text">
+                            <h2>87</h2>
+                            <p>Players Online</p>
+                        </div>
+                        <div class="stat-card green-text">
+                            <h2>203</h2>
+                            <p>Games Today</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GAME SCREEN -->
+        <section id="gameScreen" class="screen hidden">
+            <div class="game-layout">
+
+                <div class="game-main">
+                    <div class="game-header">
+                        <div>
+                            <h1>Drawing Room</h1>
+                            <p>Room Code: <strong id="activeRoomCode">------</strong></p>
+                        </div>
+
+                        <div class="timer-card">
+                            <p>Time Left</p>
+                            <h2 id="timerText">60s</h2>
+                        </div>
+                    </div>
+
+                    <div class="prompt-card">
+                        <div>
+                            <p>AI Generated Prompt</p>
+                            <h2 id="promptText">Create a room to generate prompt.</h2>
+                        </div>
+                        <button id="newPromptBtn">New Prompt</button>
+                    </div>
+
+                    <div class="canvas-toolbar">
+                        <button id="pencilBtn" class="tool-btn active">✏ Pencil</button>
+                        <button id="eraserBtn" class="tool-btn">🧽 Eraser</button>
+                        <input id="colorPicker" type="color" value="#111827" />
+                        <button id="clearBtn" class="tool-btn">Clear</button>
+                        <button id="predictBtn" class="predict-btn">Predict Category</button>
+                    </div>
+
+                    <canvas id="drawingCanvas"></canvas>
+
+                    <div class="guess-row">
+                        <input id="guessInput" type="text" placeholder="Type your guess and press Enter..." />
+                        <button id="submitGuessBtn">Submit Guess</button>
+                    </div>
+                </div>
+
+                <aside class="game-sidebar">
+                    <div class="side-card">
+                        <h3>ML Prediction</h3>
+                        <div class="prediction-box">
+                            <h2 id="predictionText">Not predicted</h2>
+                            <p id="confidenceText">Confidence: 0%</p>
+                            <div class="progress">
+                                <div id="confidenceBar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="side-card">
+                        <h3>Scoreboard</h3>
+                        <div id="scoreboardList" class="scoreboard"></div>
+                    </div>
+
+                    <div class="side-card">
+                        <h3>Activity</h3>
+                        <div id="activityList" class="activity-list"></div>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- DASHBOARD SCREEN -->
+        <section id="dashboardScreen" class="screen hidden">
+            <div class="page-heading">
+                <div>
+                    <h1>Game Dashboard</h1>
+                    <p>Track your performance and previous rounds.</p>
+                </div>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="dashboard-card">
+                    <p>Total Games</p>
+                    <h2 id="totalGames">0</h2>
+                </div>
+
+                <div class="dashboard-card">
+                    <p>Total Score</p>
+                    <h2 id="totalScore">0</h2>
+                </div>
+
+                <div class="dashboard-card">
+                    <p>Correct Guesses</p>
+                    <h2 id="correctGuesses">0</h2>
+                </div>
+
+                <div class="dashboard-card">
+                    <p>Best Category</p>
+                    <h2 id="bestCategory">Animals</h2>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Recent Game History</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Room Code</th>
+                                <th>Prompt</th>
+                                <th>ML Prediction</th>
+                                <th>Score</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
