@@ -13,6 +13,7 @@ from backend.database import init_db, get_db
 from backend.models import User, GameHistory
 from backend.security import hash_password, verify_password
 from ml.predict import predict_category
+from backend.ai_prompt import generate_ai_prompt
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -176,7 +177,7 @@ def generate_demo_prompt(category: str, difficulty: str):
 @app.post("/api/rooms/create")
 def create_room(data: RoomRequest):
     room_code = create_room_code()
-    prompt = generate_demo_prompt(data.category, data.difficulty)
+    prompt = generate_ai_prompt(data.category, data.difficulty)
 
     return {
         "message": "Room created successfully",
@@ -189,7 +190,7 @@ def create_room(data: RoomRequest):
 
 @app.post("/api/prompt")
 def create_prompt(data: RoomRequest):
-    prompt = generate_demo_prompt(data.category, data.difficulty)
+    prompt = generate_ai_prompt(data.category, data.difficulty)
 
     return {
         "prompt": prompt

@@ -4,3 +4,8 @@ sqlalchemy
 pydantic
 passlib[bcrypt]
 python-dotenv
+bcrypt==4.0.1
+scikit-learn
+joblib
+numpy
+openai

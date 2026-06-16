@@ -429,20 +429,28 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 
 document.getElementById("createRoomBtn").addEventListener("click", async () => {
     try {
+        addActivity("Creating room...");
+
         const result = await apiPost("/api/rooms/create", {
             category: categorySelect.value,
             difficulty: difficultySelect.value
         });
 
+        console.log("Create room result:", result);
+
         roomCode = result.room_code;
         currentPrompt = result.prompt;
 
         roomCodeText.textContent = roomCode;
+        roomCodeText.style.display = "inline-block";
 
-        alert("Room created successfully. Click the room code to start game.");
+        alert(`Room created successfully. Room Code: ${roomCode}`);
+
+        addActivity(`Room created: ${roomCode}`);
 
     } catch (error) {
-        alert(error.message);
+        console.error("Create room failed:", error);
+        alert("Room creation failed: " + error.message);
     }
 });
 

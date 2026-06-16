@@ -4,3 +4,4 @@ __pycache__/
 .env
 .DS_Store
 drawing_game.db
+.env.save
